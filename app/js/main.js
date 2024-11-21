@@ -1,3 +1,7 @@
-import "../css/style.css"
+import "./css/style.css"
 
-fetch ("https://api.football-data.org/v4/matches")
+const api = "https://math.tools/api/numbers/"
+
+async function getData(api){
+    const response = await api
+}
