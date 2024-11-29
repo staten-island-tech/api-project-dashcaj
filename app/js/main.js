@@ -1,35 +1,47 @@
 import "../css/style.css";
-
-const DOMSelectors = {
-
-};
-
-function createCard() {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `
-    <div class="box">
-            <h2>${name}</h2>
-            <p>${position}</p>
-            <img class="pictures1" src="${image}" alt="${name}">
-            <div>
-            <button class="deletebtn">Delete</button>
-            </div>
-    </div>
-    `;
-};
+const url = "https://www.amiiboapi.com/api/amiibo/";
 
 
 
 
-async function getData(){
-    const api = await fetch(
-        "https://api.imgflip.com/get_memes"
-    );
+
+
+
+async function getData(url){
+    try{
+        const response = await fetch(url);
+        const data = await response.json(response);
+
+        console.log(data);
+         cardBox(data); 
+    } catch (error){
+        console.log(error);
+    }
     
 };
 
-getData(api);
+getData(url);
+
+
+function cardBox(data){
+    const box = document.getElementById("container");
+    box.innerHTML = "";
+    data.forEach((game) => {
+        const html = `
+        <div class="card">
+            <h1>${game.gameSeries}</h1>
+            <h2>${game.name}</h2>
+            <img class="pictures1" src="${game.image}" alt="${game.character}">
+            <h4>${game.character}</h4>
+
+        </div>
+    `
+    box.insertAdjacentHTML("beforeend", html);
+    })
+
+
+} 
+
 
 
 
