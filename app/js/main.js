@@ -1,9 +1,7 @@
 import "../css/style.css";
 const url = "https://www.amiiboapi.com/api/amiibo/";
 const searchbox = document.getElementById("searchbar")
-
-
-
+const usersearch = searchbox.value.toLowerCase()
 
 async function getData(url){
     try{
@@ -11,6 +9,7 @@ async function getData(url){
         const data = await response.json(response);
 
         console.log(data);
+        cardBox(data);
         filter();
         
     } catch (error){
@@ -19,17 +18,6 @@ async function getData(url){
     
 };
 getData(url);
-
-
-
-
-
-
-
-
-
-
-
 
 
 function cardBox(data){
@@ -51,13 +39,9 @@ function cardBox(data){
 
 
 function filter(){
-    searchbox.addEventListener("input", function(event){
-        event.preventDefault();
-        box.innerHTML = "";
-        const userinput = searchbox.value.toLowercase()
-        const filtereditems = data.filter((game) => game.name === userinput)
-        cardBox(filtereditems);
-    });
+    box.innerHTML = "";
+    const filtereditems = data['amiibo'].filter((game) => game.name === usersearch)
+    cardBox(filtereditems);
 };
 
 
