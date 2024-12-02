@@ -1,8 +1,6 @@
 import "../css/style.css";
 const url = "https://www.amiiboapi.com/api/amiibo/";
-
-
-
+const searchbox = document.getElementById("searchbar")
 
 
 
@@ -13,20 +11,31 @@ async function getData(url){
         const data = await response.json(response);
 
         console.log(data);
-         cardBox(data); 
+        filter();
+        
     } catch (error){
         console.log(error);
     }
     
 };
-
 getData(url);
+
+
+
+
+
+
+
+
+
+
+
 
 
 function cardBox(data){
     const box = document.getElementById("container");
     box.innerHTML = "";
-    data.forEach((game) => {
+    data['amiibo'].forEach((game) => {
         const html = `
         <div class="card">
             <h1>${game.gameSeries}</h1>
@@ -38,11 +47,18 @@ function cardBox(data){
     `
     box.insertAdjacentHTML("beforeend", html);
     })
+};
 
 
-} 
-
-
+function filter(){
+    searchbox.addEventListener("input", function(event){
+        event.preventDefault();
+        box.innerHTML = "";
+        const userinput = searchbox.value.toLowercase()
+        const filtereditems = data.filter((game) => game.name === userinput)
+        cardBox(filtereditems);
+    });
+};
 
 
 
