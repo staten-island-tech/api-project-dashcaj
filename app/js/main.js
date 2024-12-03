@@ -9,8 +9,8 @@ async function getData(url){
         const data = await response.json(response);
 
         console.log(data);
-        cardBox(data);
-        filter();
+        cardBox(data, usersearch);
+
         
     } catch (error){
         console.log(error);
@@ -20,29 +20,37 @@ async function getData(url){
 getData(url);
 
 
-function cardBox(data){
+function cardBox(data, usersearch){
     const box = document.getElementById("container");
     box.innerHTML = "";
-    data['amiibo'].forEach((game) => {
-        const html = `
-        <div class="card">
-            <h1>${game.gameSeries}</h1>
-            <h2>${game.name}</h2>
-            <img class="pictures1" src="${game.image}" alt="${game.character}">
-            <h4>${game.character}</h4>
 
-        </div>
-    `
+    const filtereddata = data['amiibo'].filter{
+        
+
+
+    }
+
+    const html = `
+    <div class="card">
+        <h1>${game.gameSeries}</h1>
+        <h2>${game.name}</h2>
+        <img class="pictures1" src="${game.image}" alt="${game.character}">
+        <h4>${game.character}</h4>
+
+    </div>`
+
+
+    data['amiibo'].forEach((amiibo) => {
     box.insertAdjacentHTML("beforeend", html);
     })
 };
 
 
-function filter(){
+/* function filter(){
     box.innerHTML = "";
     const filtereditems = data['amiibo'].filter((game) => game.name === usersearch)
     cardBox(filtereditems);
-};
+}; */
 
 
 
