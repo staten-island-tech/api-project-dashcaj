@@ -1,59 +1,50 @@
 import "../css/style.css";
-const url = "https://www.amiiboapi.com/api/amiibo/";
-const searchbox = document.getElementById("searchbar")
-const usersearch = searchbox.value.toLowerCase()
 
-async function getData(url){
-    try{
-        const response = await fetch(url);
-        const data = await response.json(response);
+const url = "https://www.amiiboapi.com/api/amiibo/"; 
+const searchbox = document.getElementById("searchbar");
 
+
+async function getData(searchTerm = '') {
+    try {
+        const searchUrl = searchTerm ? `${url}?name=${searchTerm}` : url; 
+        const response = await fetch(searchUrl);
+        const data = await response.json();
         console.log(data);
-        cardBox(data, usersearch);
-
-        
-    } catch (error){
+        cardBox(data);
+    } catch (error) {
         console.log(error);
     }
-    
-};
-getData(url);
+}
 
 
-function cardBox(data, usersearch){
+function cardBox(data) {
     const box = document.getElementById("container");
     box.innerHTML = "";
-
-    const filtereddata = data['amiibo'].filter{
-        
-
-
+    
+    if (!data || !data.amiibo || data.amiibo.length === 0) {
+        box.innerHTML = "<p>No Amiibo found matching your search.</p>";
+        return;
     }
 
-    const html = `
-    <div class="card">
-        <h1>${game.gameSeries}</h1>
-        <h2>${game.name}</h2>
-        <img class="pictures1" src="${game.image}" alt="${game.character}">
-        <h4>${game.character}</h4>
-
-    </div>`
-
-
     data['amiibo'].forEach((amiibo) => {
-    box.insertAdjacentHTML("beforeend", html);
-    })
-};
+        const html = `
+            <div class="card">
+                <h1>${amiibo.gameSeries}</h1>
+                <h2>${amiibo.name}</h2>
+                <img class="pictures1" src="${amiibo.image}" alt="${amiibo.character}">
+                <h4>${amiibo.character}</h4>
+            </div>
+        `;
+        box.insertAdjacentHTML("beforeend", html);
+    });
+}
 
+searchbox.addEventListener("input", () => {
+    const usersearch = searchbox.value.toLowerCase().trim();
+    getData(usersearch); 
+});
 
-/* function filter(){
-    box.innerHTML = "";
-    const filtereditems = data['amiibo'].filter((game) => game.name === usersearch)
-    cardBox(filtereditems);
-}; */
-
-
-
+getData();
 
 
 
