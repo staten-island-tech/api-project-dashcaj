@@ -30,10 +30,10 @@ function cardBox(data) {
     data['amiibo'].forEach((amiibo) => {
         const html = `
             <div class="card w-60 rounded-[14px] border-8 font-semibold border-[rgb(187,159,0)] m-4 bg-slate-300 bg-black">
-                <h1>${amiibo.gameSeries}</h1>
-                <h2>${amiibo.name}</h2>
+                <h1 class="text-[rgb(187,159,0)]">${amiibo.gameSeries}</h1>
+                <h2 class="text-[rgb(187,159,0)]">${amiibo.name}</h2>
                 <img class="pictures1 w-3/5 h-3/6 mx-auto my-8" src="${amiibo.image}" alt="${amiibo.character}">
-                <h4>${amiibo.character}</h4>
+                <h4 class="text-[rgb(187,159,0)]">${amiibo.character}</h4>
             </div>
         `;
         box.insertAdjacentHTML("beforeend", html);
