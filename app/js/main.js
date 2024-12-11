@@ -29,10 +29,17 @@ function cardBox(data) {
 
     data['amiibo'].forEach((amiibo) => {
         const html = `
-            <div class="card w-60 rounded-[14px] border-8 font-semibold border-[rgb(187,159,0)] m-4 bg-slate-300 bg-black">
+            <div class="
+            xs:card w-80 rounded-[14px] border-8 font-semibold border-[rgb(187,159,0)] m-4 bg-slate-300 bg-black
+            lg:card w-60 rounded-[14px] border-8 font-semibold border-[rgb(187,159,0)] m-4 bg-slate-300 bg-black
+            2xl:card w-60 rounded-[14px] border-8 font-semibold border-[rgb(187,159,0)] m-4 bg-slate-300 bg-black
+            ">
                 <h1 class="text-[rgb(187,159,0)]">${amiibo.gameSeries}</h1>
                 <h2 class="text-[rgb(187,159,0)]">${amiibo.name}</h2>
-                <img class="pictures1 w-3/5 h-3/6 mx-auto my-8" src="${amiibo.image}" alt="${amiibo.character}">
+                <img class="
+                xs:pictures1 w-3/5 h-3/6 mx-auto my-8
+                lg:pictures1 w-3/5 h-3/6 mx-auto my-8
+                2xl:pictures1 w-4/5 h-3/6 mx-auto my-8" src="${amiibo.image}" alt="${amiibo.character}">
                 <h4 class="text-[rgb(187,159,0)]">${amiibo.character}</h4>
             </div>
         `;
